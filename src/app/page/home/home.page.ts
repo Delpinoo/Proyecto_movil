@@ -10,7 +10,7 @@ export class HomePage {
 
   listItems:MenuItem[]=[
     {
-      ruta:'/docente',
+      ruta:'/login',
       icono: 'briefcase-outline',
       etiqueta: 'Docente'
     },
