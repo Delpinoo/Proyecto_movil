@@ -7,13 +7,13 @@
 <ion-content class="ion-padding ">
 
   <ion-list class="custom-list" [inset]="true" lines="full" mode="ios">
-    <ion-list-header color="primary">
+    <ion-list-header class="custom-header" color="primary">
       <ion-label >Seleccione el perfil</ion-label>
     </ion-list-header>
 
     <ion-item detail="true" routerLink="{{item.ruta}}" *ngFor="let item of listItems" >
       <ion-icon name="{{item.icono}}" slot="start"></ion-icon>
-      <ion-label class="ion-text-capitalize">{{item.etiqueta}}</ion-label>
+      <ion-label class="ion-text-capitalize custom-menu">{{item.etiqueta}}</ion-label>
     </ion-item>
 
     </ion-list>
