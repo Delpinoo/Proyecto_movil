@@ -1,5 +1,4 @@
 .container {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -10,8 +9,25 @@
 .center-button {
     width: 300px; 
     text-align: center;
+    margin-left: 40px;
 }
 
 .center-image {
     width: 600px; 
+}
+
+ion-content {
+    --background: #011941;
+}
+
+.custom-list {
+    width: 90%;
+    height: 380px;
+    max-width: 400px;
+    padding: 20px 1px;
+    margin-top: 90px;
+    margin-left: 20px;
+
+    background-color: #f6f6c7; 
+    border-radius: 15px; 
 }
