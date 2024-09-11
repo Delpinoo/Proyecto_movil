@@ -1,13 +1,9 @@
-<ion-header >
-  <ion-toolbar color="secondary">
-    <ion-title mode="md" class="ion-text-center"><h1>Registrapp</h1></ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-encabezado [titulo]="'Registrapp'"></app-encabezado>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">alumno</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-content>
+    <div class="container">
+    <img src="assets/images/qr.png" alt="Descripción de la imagen" class="center-image">> 
+    <ion-button expand="block" class="center-button">Escanear QR</ion-button>
+</div>
 </ion-content>
