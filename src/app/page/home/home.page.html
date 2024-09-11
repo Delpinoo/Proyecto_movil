@@ -1,20 +1,36 @@
-<ion-header>
+<!--
+<ion-header >
   <ion-toolbar color="secondary">
     <ion-title mode="md" class="ion-text-center"><h1>Registrapp</h1></ion-title>
   </ion-toolbar>
 </ion-header>
+<-->
 
-<ion-content class="ion-padding ">
-
-  <ion-list class="custom-list" [inset]="true" lines="full" mode="ios">
-    <ion-list-header class="custom-header" color="primary">
-      <ion-label >Seleccione el perfil</ion-label>
+<ion-content>
+  <!--
+  <ion-item class="return" (click)="goBack()">
+    <ion-icon class="icon-large" name="arrow-back-outline"></ion-icon>
+    <span type="text">Volver</span>
+  < </ion-item>
+  <-->
+  <ion-list class="custom-list">
+    <ion-list-header class="list-ini" color="primary">
+      <ion-label >Iniciar sesion</ion-label>
     </ion-list-header>
-
-    <ion-item detail="true" routerLink="{{item.ruta}}" *ngFor="let item of listItems" >
-      <ion-icon name="{{item.icono}}" slot="start"></ion-icon>
-      <ion-label class="ion-text-capitalize custom-menu">{{item.etiqueta}}</ion-label>
-    </ion-item>
-
+        <ion-item class="label-dates">
+          <ion-label position="floating">
+            Correo institucional:
+          </ion-label>
+          <ion-input type="email">
+            
+          </ion-input>
+          <ion-label position="floating">
+            Contraseña:
+          </ion-label>
+          <ion-input type="password"> </ion-input>
+        </ion-item>
+        <ion-button class="buttom">Iniciar</ion-button>
+        <ion-button class="buttom" (click)="goToalumno()">Alumno</ion-button>
+        <ion-button class="buttom" (click)="goTodocente()">Docente</ion-button>
     </ion-list>
-  </ion-content>
+</ion-content>
