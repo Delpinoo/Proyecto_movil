@@ -1,3 +1,37 @@
 ion-content {
     --background: #011941;
 }
+
+.custom-list {
+    width: 90%;
+    height: 380px;
+    max-width: 400px;
+    padding: 20px 1px;
+    margin-top: 90px;
+    margin-left: 20px;
+
+    background-color: #f6f6c7; 
+    border-radius: 15px; 
+}
+
+.left-select {
+    width: 260px; 
+    text-align: left;
+    margin-right: 200px;
+    margin-left: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.list-ini {
+    width: 260px;
+    margin-left: 20px;
+    margin-right: 200px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.buttom {
+    margin-top: 30px;
+    margin-left: 20px;
+}

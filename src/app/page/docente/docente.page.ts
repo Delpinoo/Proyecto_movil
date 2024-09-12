@@ -10,6 +10,10 @@ export class DocentePage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
 
+  goToqr() {
+    this.navCtrl.navigateForward('/qr')
+  }
+
   ngOnInit() {
   }
 

@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'verificacion',
     loadChildren: () => import('./page/verificacion/verificacion.module').then( m => m.VerificacionPageModule)
   },
+  {
+    path: 'qr',
+    loadChildren: () => import('./page/qr/qr-genrated.module').then( m => m.QrGenratedPageModule)
+  },
 ]
 
 @NgModule({
