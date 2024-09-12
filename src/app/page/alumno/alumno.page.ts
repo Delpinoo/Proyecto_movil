@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alumno',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlumnoPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) { }
+  
+  goToverification() {
+    this.navCtrl.navigateForward('/verificacion')
+  }
+
 
   ngOnInit() {
   }
