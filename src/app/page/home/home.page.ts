@@ -34,6 +34,4 @@ export class HomePage {
   goToalumno() {
     this.navCtrl.navigateForward('/alumno')
   }
-  
-  
 }
