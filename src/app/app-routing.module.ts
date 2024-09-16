@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'qr',
     loadChildren: () => import('./page/qr/qr-genrated.module').then( m => m.QrGenratedPageModule)
   },
+  {
+    path: 'lista-alumno',
+    loadChildren: () => import('./page/lista-alumno/lista-alumo.module').then( m => m.ListaAlumoPageModule)
+  },
+
 ]
 
 @NgModule({

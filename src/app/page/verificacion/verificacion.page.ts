@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-verificacion',
@@ -8,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerificacionPage implements OnInit {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
 
   ngOnInit() {
+  }
+
+  goTolista_alumno() {
+    this.navCtrl.navigateForward('/lista-alumno')
   }
 
 }
