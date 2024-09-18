@@ -10,8 +10,8 @@ export class ListaAlumnoPage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
 
-  goToverification() {
-    this.navCtrl.navigateForward('/verificacion')
+  goTolista_alumno() {
+    this.navCtrl.navigateForward('/lista-alumno')
   }
 
   ngOnInit() {

@@ -17,8 +17,4 @@ export class VerificacionPage implements OnInit {
   ngOnInit() {
   }
 
-  goTolista_alumno() {
-    this.navCtrl.navigateForward('/lista-alumno')
-  }
-
 }
