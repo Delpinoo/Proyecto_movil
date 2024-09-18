@@ -1,0 +1,33 @@
+ion-content {
+    --background: #011941;
+}
+
+.container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+
+.center-button {
+    width: 300px; 
+    text-align: center;
+    margin-left: 32px;
+}
+
+.center-image {
+    width: 600px; 
+}
+
+.custom-list {
+    width: 90%;
+    height: 380px;
+    max-width: 400px;
+    padding: 20px 1px;
+    margin-top: 90px;
+    margin-left: 20px;
+
+    background-color: #f6f6c7; 
+    border-radius: 15px; 
+}
