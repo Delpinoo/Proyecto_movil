@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-encabezado',
@@ -7,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EncabezadoComponent  implements OnInit {
 
-  constructor() {}
+  constructor(private navCtrl: NavController) {}
 
   @Input() titulo: string ='';
   
@@ -15,4 +16,7 @@ export class EncabezadoComponent  implements OnInit {
     console.log(this.titulo);
   }
 
+  goToperfil() {
+    this.navCtrl.navigateForward('/perfil')
+  }
 }
