@@ -1,3 +1,28 @@
 ion-content {
     --background: #011941;
 }
+
+.custom-list {
+    width: 90%;
+    height: 380px;
+    max-width: 400px;
+    padding: 20px 1px;
+    margin-top: 90px;
+    margin-left: 20px;
+
+    background-color: #f6f6c7; 
+    border-radius: 15px; 
+}
+
+.custom-perfil{
+    margin: auto;
+    width: 130px;
+    height: 130px;
+}
+
+.custom-information{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 15px;
+}
