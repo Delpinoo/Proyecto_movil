@@ -10,6 +10,10 @@ export class QrGenratedPage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
 
+  goTolista_docente(){
+    this.navCtrl.navigateForward('/lista-docente')
+  }
+
   ngOnInit() {
   }
 
