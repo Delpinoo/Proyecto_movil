@@ -37,4 +37,8 @@ export class HomePage {
   goToperfil() {
     this.navCtrl.navigateForward('/perfil')
   }
+
+  goTorecover_password() {
+    this.navCtrl.navigateForward('/code-verifi')
+  }
 }

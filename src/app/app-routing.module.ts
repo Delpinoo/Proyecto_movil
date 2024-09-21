@@ -43,6 +43,13 @@ const routes: Routes = [
     loadChildren: () => import('./page/lista-docente/lista-docente.module').then( m => m.ListaDocentePageModule)
 
   },
+  {
+    path: 'code-verifi',
+    loadChildren: () => import('./page/code-verifi/code-verifi.module').then( m => m.CodeVerifiPageModule)
+  },
+
+
+
 
 
 ]
