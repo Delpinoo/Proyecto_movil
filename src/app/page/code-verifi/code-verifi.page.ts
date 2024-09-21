@@ -14,7 +14,7 @@ export class CodeVerifiPage implements OnInit {
   }
 
   goTonuevacontrasena() {
-    this.navCtrl.navigateForward('/nueva-contraseña')
+    this.navCtrl.navigateForward('/nueva-contrasena')
   }
 
 }

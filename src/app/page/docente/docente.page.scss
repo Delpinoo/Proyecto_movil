@@ -9,9 +9,13 @@ ion-content {
     padding: 20px 1px;
     margin-top: 90px;
     margin-left: 20px;
-
+    margin-left: auto;
+    margin-right: auto;
     background-color: #f6f6c7; 
-    border-radius: 15px; 
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
 }
 
 .left-select {
@@ -34,4 +38,9 @@ ion-content {
 .buttom {
     margin-top: 30px;
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    margin-left: auto;
+    margin-right: auto;
 }

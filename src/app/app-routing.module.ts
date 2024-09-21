@@ -47,6 +47,15 @@ const routes: Routes = [
     path: 'code-verifi',
     loadChildren: () => import('./page/code-verifi/code-verifi.module').then( m => m.CodeVerifiPageModule)
   },
+  {
+    path: 'nueva-contrasena',
+    loadChildren: () => import('./page/nueva-contrasena/nueva-contrasena.module').then( m => m.NuevaContrasenaPageModule)
+  },
+  {
+    path: 'nueva-contrasena',
+    loadChildren: () => import('./page/nueva-contrasena/nueva-contrasena.module').then( m => m.NuevaContrasenaPageModule)
+  },
+
 
 
 
