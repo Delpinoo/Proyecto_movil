@@ -14,6 +14,7 @@ ion-content {
     width: 300px; 
     text-align: center;
     margin-left: 32px;
+    margin-top: 18px;
 }
 
 .center-image {
@@ -43,6 +44,7 @@ ion-content {
     border-radius: 10px;
 }
 
-.search{
-    --background: #011941;
+.search {
+    width: 100%; 
+    box-sizing: border-box; 
 }

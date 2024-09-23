@@ -21,6 +21,12 @@
           <ion-label>5. John doe</ion-label>
         </ion-item>
       </ion-list>
+      <ion-button id="present-alert" expand="block" class="center-button">Guardar lista</ion-button>
+      <ion-alert
+        trigger="present-alert"
+        header="La lista ha sido guardada"
+        [buttons]="alertButtons"
+      ></ion-alert>
     </div>
   </ion-list>
 </ion-content>
