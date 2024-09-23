@@ -2,9 +2,11 @@
 
 <ion-content >
     <ion-list class="custom-list">
-        <ion-avatar class="custom-perfil">
-            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-        </ion-avatar>
+        <div class="custom-margin-img">
+            <ion-avatar class="custom-img-perfil">
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+        </div>
         <ion-list class="custom-information">
             <ion-item class="information">
                 <ion-label>Ruperto perejil gonzales bacalao</ion-label>
@@ -16,5 +18,8 @@
                 <ion-label>PGY3040-003D</ion-label>
             </ion-item>
         </ion-list>
+        <div class="custom-button">
+            <ion-button (click)="cambiarContrasena()">Cerrar sesion</ion-button>
+        </div>
     </ion-list>
 </ion-content>
