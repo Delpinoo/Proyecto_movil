@@ -47,11 +47,18 @@ ion-content {
 }
 
 .list-ini {
-    width: 100%; /* Asegura que el contenedor del label ocupe todo el ancho */
-    box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+    width: 100%; 
+    box-sizing: border-box;
+    border-radius: 15px;
 }
 
 .search {
     width: 100%; 
     box-sizing: border-box;
+}
+
+.custom-container-title {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
