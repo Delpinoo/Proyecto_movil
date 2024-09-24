@@ -18,7 +18,7 @@ export class PerfilPage implements OnInit {
   async cambiarContrasena() {
     const alert = await this.alertController.create({
       header: 'Éxito',
-      message: 'La sesion se cerro correctamente',
+      message: 'La sesion se cerro correctamente.',
       buttons: [
         {
           text: 'Aceptar',
