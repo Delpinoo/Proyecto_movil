@@ -14,6 +14,9 @@ export class AlumnoPage implements OnInit {
     this.navCtrl.navigateForward('/verificacion')
   }
 
+  goTolista() {
+    this.navCtrl.navigateForward('/lista-alumno')
+  }
 
   ngOnInit() {
   }

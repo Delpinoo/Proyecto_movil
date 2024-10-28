@@ -1,30 +1,13 @@
 <app-encabezado></app-encabezado>
 
-<ion-content >
+<ion-content>
+  
   <ion-list class="custom-list">
-    <ion-list-header class="list-ini" color="primary">
-      <ion-label >Seleccione la carrera</ion-label>
-    </ion-list-header>
-    <ion-item class="left-select">
-      <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione la Carrera">
-        <ion-select-option value="apples">Ingeniería y automatizacion en el dickson</ion-select-option>
-        <ion-select-option value="oranges">Ingeniería en Informática</ion-select-option>
-        <ion-select-option value="bananas">Ingeniería en automotriz</ion-select-option>
-        <ion-select-option value="bananas">Tecnico de odontología</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <h1></h1>
-    <ion-list-header class="list-ini" color="primary">
-      <ion-label >Seleccione a seccion</ion-label>
-    </ion-list-header>
-    <ion-item class="left-select">
-      <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione la Seccion">
-        <ion-select-option value="apples">PGY4100-003D</ion-select-option>
-        <ion-select-option value="oranges">PGY4101-008D</ion-select-option>
-        <ion-select-option value="bananas">PGY3130-001D</ion-select-option>
-        <ion-select-option value="bananas">PGY5630-007D</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-button class="buttom" (click)="goToqr()">Generar QR</ion-button>
+    <div class="container">
+      <img src="assets/images/miqr.png" alt="Descripción de la imagen" class="center-image">
+      <ion-button expand="block" class="center-button" (click)="goToqr()">Generar Qr</ion-button>
+      <img src="assets/images/presente.png" alt="Descripción de la imagen" class="center-imagen">
+      <ion-button expand="block" class="center-button" (click)="goTolista_docente()">Ver lista</ion-button>
+    </div>
   </ion-list>
 </ion-content>
