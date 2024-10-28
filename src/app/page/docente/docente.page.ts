@@ -13,6 +13,9 @@ export class DocentePage implements OnInit {
   goToqr() {
     this.navCtrl.navigateForward('/qr')
   }
+  goTolista_docente() {
+    this.navCtrl.navigateForward('/lista-docente')
+  }
 
   ngOnInit() {
   }

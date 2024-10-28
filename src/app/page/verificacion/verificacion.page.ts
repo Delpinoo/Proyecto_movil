@@ -10,8 +10,8 @@ export class VerificacionPage implements OnInit {
 
   constructor(private navCtrl: NavController) {}
 
-  goTolista_alumno() {
-    this.navCtrl.navigateForward('/lista-alumno')
+  goToatras() {
+    this.navCtrl.navigateForward('/alumno')
 }
 
   ngOnInit() {

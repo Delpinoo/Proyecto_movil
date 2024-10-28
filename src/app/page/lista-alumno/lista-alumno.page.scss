@@ -7,16 +7,9 @@ ion-content {
     justify-content: center;
     align-items: center;
     height: 90vh;
-    margin-top: 25pxr;
+    margin-top: 25px;
 }
 
-
-.center-button {
-    width: 300px; 
-    text-align: center;
-    margin-left: 32px;
-    margin-top: 18px;
-}
 
 .center-image {
     width: 600px; 
@@ -61,4 +54,27 @@ ion-content {
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 10px;
+}
+
+.custom-list {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px 1px;
+    margin: 90px auto 0; 
+    background-color: #f6f6c7; 
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto; 
+    max-height: 400px; 
+}
+
+.custom-container-title {
+    margin: 0 20px 10px; 
+}
+
+.horizontal-accordion {
+    display: flex;
+    flex-direction: column; 
 }
