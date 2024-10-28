@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'nueva-contrasena',
     loadChildren: () => import('./page/nueva-contrasena/nueva-contrasena.module').then( m => m.NuevaContrasenaPageModule)
+  },  {
+    path: 'register',
+    loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
   },
+
 
 
 

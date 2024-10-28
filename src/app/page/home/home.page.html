@@ -20,14 +20,19 @@
             </ion-label>
             <ion-input type="password"> </ion-input>
           </ion-item>
-          <div class="recover_password">
-            <a routerLink="/code-verifi">Olvide mi contraseña</a>
+          <div class="container-links">
+            <div class="recover_password">
+              <a routerLink="/code-verifi">Olvide mi contraseña</a>
+            </div>
+            <div class="recover_password">
+              <a routerLink="/register">Registrar</a>
+            </div>
           </div>
           <div>
             <ion-button class="buttom">Iniciar</ion-button>
             <ion-button class="buttom" (click)="goToalumno()">Alumno</ion-button>
             <ion-button class="buttom" (click)="goTodocente()">Docente</ion-button>
-        </div>
+          </div>
         </ion-list>
   </ion-content>
 
