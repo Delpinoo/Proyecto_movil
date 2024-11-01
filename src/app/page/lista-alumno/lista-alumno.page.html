@@ -1,51 +1,18 @@
 <app-encabezado></app-encabezado>
-
-<ion-content >
-  <ion-list class="custom-list">
-    <div class="custom-container-title">
-      <ion-list-header class="list-ini" color="primary">
-        <ion-label >Mis ramos</ion-label>
-      </ion-list-header>
-    </div>
-    <ion-accordion-group class="horizontal-accordion">
-      <ion-accordion value="first">
-        <ion-item slot="header" color="light">
-          <ion-label>Matematicas</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">Porcentaje de asistencia: 76%</div>
-        <div class="ion-padding" slot="content">Presente 27-10-2024</div>
-        <div class="ion-padding" slot="content">Ausente 26-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 24-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 27-09-2024</div>
-      </ion-accordion>
-      <ion-accordion value="second">
-        <ion-item slot="header" color="light">
-          <ion-label>Programacion</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">Porcentaje de asistencia: 72%</div>
-        <div class="ion-padding" slot="content">Presente 27-10-2024</div>
-        <div class="ion-padding" slot="content">Ausente 26-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 24-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 27-09-2024</div>
-      </ion-accordion>
-      <ion-accordion value="third">
-        <ion-item slot="header" color="light">
-          <ion-label>Ingles</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">Porcentaje de asistencia: 68%</div>
-        <div class="ion-padding" slot="content">Presente 27-10-2024</div>
-        <div class="ion-padding" slot="content">Ausente 26-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 24-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 27-09-2024</div>
-      </ion-accordion>
-      <ion-accordion value="four">
-        <ion-item slot="header" color="light">
-          <ion-label>Cristianismo</ion-label>
-        </ion-item>
-        <div class="ion-padding" slot="content">Porcentaje de asistencia: 54%</div>
-        <div class="ion-padding" slot="content">Presente 27-10-2024</div>
-        <div class="ion-padding" slot="content">Ausente 26-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 24-10-2024</div>
-        <div class="ion-padding" slot="content">Presente 27-09-2024</div>
-      </ion-accordion>
-    </ion-accordion-group>
+<ion-content>
+  <ion-card class="custom-class">
+    <ion-searchbar placeholder="Buscarme en lista" class="search"></ion-searchbar>
+    <ion-card-content>
+      <div class="list-container">
+        <ion-list>
+          <ion-item *ngFor="let item of items; let index">
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+            </ion-avatar>
+            <ion-label>{{ item }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

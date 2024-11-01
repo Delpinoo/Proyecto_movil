@@ -28,9 +28,9 @@ const routes: Routes = [
     loadChildren: () => import('./page/qr/qr-genrated.module').then( m => m.QrGenratedPageModule)
   },
   {
-    path: 'lista-alumno',
+    path: 'ramos',
     
-    loadChildren: () => import('./page/lista-alumno/lista-alumno.module').then( m => m.ListaAlumnoPageModule)
+    loadChildren: () => import('./page/ramos/ramos.module').then( m => m.RamosPageModule)
   },
   
   {
@@ -54,10 +54,15 @@ const routes: Routes = [
   {
     path: 'nueva-contrasena',
     loadChildren: () => import('./page/nueva-contrasena/nueva-contrasena.module').then( m => m.NuevaContrasenaPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
+  },  {
+    path: 'lista-alumno',
+    loadChildren: () => import('./page/lista-alumno/lista-alumno.module').then( m => m.ListaAlumnoPageModule)
   },
+
 
 
 

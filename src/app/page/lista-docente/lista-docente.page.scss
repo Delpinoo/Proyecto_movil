@@ -30,7 +30,7 @@ ion-content {
     margin-left: 20px;
     margin-left: auto;
     margin-right: auto;
-    background-color: #f6f6c7; 
+    background-color: #e0e0e0; 
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -47,4 +47,28 @@ ion-content {
 .search {
     width: 100%; 
     box-sizing: border-box; 
+}
+
+ion-card {
+    margin: 20px;
+    border-radius: 10px; 
+    background-color: #e0e0e0; 
+}
+
+ion-list {
+    margin: 0; 
+}
+
+ion-item {
+    --background: black; 
+}
+
+.custom-card {
+    width: 400px; 
+    margin: 0 auto; 
+}
+
+.list-container {
+    max-height: 700px; 
+    overflow-y: auto;
 }

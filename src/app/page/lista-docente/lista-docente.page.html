@@ -1,32 +1,19 @@
 <app-encabezado></app-encabezado>
 
 <ion-content >
-  <ion-list class="custom-list">
+  <ion-card class="custom-class">
     <ion-searchbar placeholder="Buscarme en lista" class="search"></ion-searchbar>
-    <div class="container">
-      <ion-list class="lista_alumno">
-        <ion-item>
-          <ion-label>1.John doe</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>2. John doe</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>3. John doe</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>4. John doe</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>5. John doe</ion-label>
-        </ion-item>
-      </ion-list>
-      <ion-button id="present-alert" expand="block" class="center-button">Guardar lista</ion-button>
-      <ion-alert
-        trigger="present-alert"
-        header="La lista ha sido guardada"
-        [buttons]="alertButtons"
-      ></ion-alert>
-    </div>
-  </ion-list>
+    <ion-card-content>
+      <div class="list-container">
+        <ion-list>
+          <ion-item *ngFor="let item of items; let index">
+            <ion-avatar slot="start">
+              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+            </ion-avatar>
+            <ion-label>{{ item }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

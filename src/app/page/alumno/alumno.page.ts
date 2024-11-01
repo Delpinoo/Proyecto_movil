@@ -14,7 +14,11 @@ export class AlumnoPage implements OnInit {
     this.navCtrl.navigateForward('/verificacion')
   }
 
-  goTolista() {
+  goToRamos() {
+    this.navCtrl.navigateForward('/ramos')
+  }
+
+  goTolista_alumno() {
     this.navCtrl.navigateForward('/lista-alumno')
   }
 
