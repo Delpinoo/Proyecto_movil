@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/user.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-perfil',
@@ -10,15 +12,26 @@ import { Router } from '@angular/router';
 })
 export class PerfilPage implements OnInit {
 
-  constructor(private navCtrl: NavController, private alertController: AlertController, private router: Router) { }
+  user: User | undefined;
+
+  constructor(private navCtrl: NavController, private alertController: AlertController, private router: Router, private userService: UserService) { }
 
   ngOnInit() {
+    this.loadUserData();
   }
 
-  async cambiarContrasena() {
+  loadUserData() {
+    const users = this.userService.getUsers();
+    this.user = users.length > 0 ? users[0] : undefined;
+  }
+
+  async cerrar_sesion() {
+    // Llama al método de cierre de sesión del servicio
+    this.userService.logout();
+
     const alert = await this.alertController.create({
       header: 'Éxito',
-      message: 'La sesion se cerro correctamente.',
+      message: 'La sesión se cerró correctamente.',
       buttons: [
         {
           text: 'Aceptar',
@@ -29,7 +42,6 @@ export class PerfilPage implements OnInit {
         },
       ],
     });
-
     alert.cssClass = 'custom-alert';
     
     await alert.present();

@@ -14,7 +14,9 @@ export class RegisterPage implements OnInit {
     apellido: '',
     correo: '',
     contrasena: '',
-    confirmarContrasena: ''
+    confirmarContrasena: '',
+    carrera: '',
+    seccion: '',
   };
 
   constructor(
@@ -28,7 +30,6 @@ export class RegisterPage implements OnInit {
   async Register() {
     if (this.validateFields()) {
       const isRegistered = this.userService.addUser(this.user); 
-
       if (isRegistered) {
         const alert = await this.alertController.create({
           header: 'Éxito',

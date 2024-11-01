@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { User } from './shared/user.model';
+import { User } from './shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private usersKey = 'users'; 
+  private usersKey = 'users'
+
 
   constructor() {}
 
   addUser(user: User): boolean {
     const users: User[] = this.getUsers();
     
-   
+
     const existingUser = users.find(u => u.correo === user.correo);
     if (existingUser) {
       console.log('El correo ya está registrado');
@@ -38,5 +39,11 @@ export class UserService {
     const users: User[] = this.getUsers();
     const user = users.find(u => u.correo === correo && u.contrasena === contrasena);
     return user !== undefined; // Retorna true si se encuentra el usuario
-}
+  }
+
+  logout() {
+    localStorage.removeItem(this.usersKey);
+    console.log('Sesión cerrada');
+  }
+
 }

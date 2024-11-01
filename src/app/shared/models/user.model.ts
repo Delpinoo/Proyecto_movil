@@ -6,5 +6,7 @@ export interface User {
     correo: string;
     contrasena: string;
     confirmarContrasena: string;
+    carrera: string;
+    seccion: string;
   }
   

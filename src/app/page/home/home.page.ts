@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { UserService } from '../../user.service'; // Ajusta la ruta según tu estructura
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-home',
@@ -21,13 +21,11 @@ export class HomePage {
     const isLoggedIn = this.userService.login(this.correo, this.contrasena);
     
     if (isLoggedIn) {
-      // Verifica el dominio del correo y navega a la página correspondiente
       if (this.correo.endsWith('@profesor.duoc.cl')) {
-        this.navCtrl.navigateForward('docente'); // Cambia esta ruta a la página correspondiente para docentes
+        this.navCtrl.navigateForward('docente');
       } else if (this.correo.endsWith('@duocuc.cl')) {
-        this.navCtrl.navigateForward('/alumno'); // Cambia esta ruta a la página correspondiente para alumnos
+        this.navCtrl.navigateForward('/alumno'); 
       } else {
-        // Manejar el caso en que el correo no sea válido
         const alert = await this.alertController.create({
           header: 'Error',
           message: 'Dominio de correo no permitido.',
