@@ -33,4 +33,10 @@ export class UserService {
   getUserCount(): number {
     return this.getUsers().length; 
   }
+  
+  login(correo: string, contrasena: string): boolean {
+    const users: User[] = this.getUsers();
+    const user = users.find(u => u.correo === correo && u.contrasena === contrasena);
+    return user !== undefined; // Retorna true si se encuentra el usuario
+}
 }

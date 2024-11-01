@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
 const routes: Routes = [
   {
     path: 'home',
@@ -54,7 +55,8 @@ const routes: Routes = [
   {
     path: 'nueva-contrasena',
     loadChildren: () => import('./page/nueva-contrasena/nueva-contrasena.module').then( m => m.NuevaContrasenaPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./page/register/register.module').then( m => m.RegisterPageModule)
   },
