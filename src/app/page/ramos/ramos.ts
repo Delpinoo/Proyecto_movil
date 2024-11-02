@@ -12,19 +12,19 @@ export class RamosPage implements OnInit {
   ramos: any[] = [];
 
   private ramosPorCarrera: { [key: string]: any[] } = {
-    carrera1: [ 
+    Informatica: [ 
       { nombre: 'Matemáticas', asistencia: 76, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Programación', asistencia: 72, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Inglés', asistencia: 68, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Cristianismo', asistencia: 54, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] }
     ],
-    carrera2: [ 
+    Mecanica: [ 
       { nombre: 'Física', asistencia: 80, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Química', asistencia: 75, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Matemáticas', asistencia: 70, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Cristianismo', asistencia: 50, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] }
     ],
-    carrera3: [ 
+    Administracion: [ 
       { nombre: 'Contabilidad', asistencia: 78, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Economía', asistencia: 77, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
       { nombre: 'Administración', asistencia: 85, fechas: ['27-10-2024', '24-10-2024', '27-09-2024'] },
