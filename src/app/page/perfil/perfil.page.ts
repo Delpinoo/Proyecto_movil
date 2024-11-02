@@ -26,7 +26,7 @@ export class PerfilPage implements OnInit {
   }
 
   async cerrar_sesion() {
-    // Llama al método de cierre de sesión del servicio
+
     this.userService.logout();
 
     const alert = await this.alertController.create({
@@ -43,7 +43,7 @@ export class PerfilPage implements OnInit {
       ],
     });
     alert.cssClass = 'custom-alert';
-    
+
     await alert.present();
   }
 }
