@@ -16,21 +16,13 @@
         <ion-input type="text" [(ngModel)]="user.apellido" name="apellido" required></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Carrera</ion-label>
-        <ion-select [(ngModel)]="user.carrera" name="carrera" required>
-          <ion-select-option value="carrera1">Ing.Informatica</ion-select-option>
-          <ion-select-option value="carrera2">Mecanica</ion-select-option>
-          <ion-select-option value="carrera3">Tecnico Administracion</ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Carrera:</ion-label>
+        <ion-input type="text" [(ngModel)]="user.carrera"></ion-input>
       </ion-item>
       
       <ion-item>
-        <ion-label position="floating">Sección</ion-label>
-        <ion-select [(ngModel)]="user.seccion" name="seccion" required>
-          <ion-select-option value="seccionA">PGY-2131</ion-select-option>
-          <ion-select-option value="seccionB">PRY-2211</ion-select-option>
-          <ion-select-option value="seccionC">PGY-1122</ion-select-option>
-        </ion-select>
+        <ion-label position="floating">Sección:</ion-label>
+        <ion-input type="text" [(ngModel)]="user.seccion"></ion-input>
       </ion-item>
       <ion-item >
         <ion-label position="floating">Correo institucional:</ion-label>
