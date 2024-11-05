@@ -18,25 +18,20 @@ export class HomePage {
   ) {}
 
   async login() {
-    const isLoggedIn = this.userService.login(this.correo, this.contrasena);
-    
-    if (isLoggedIn) {
-      if (this.correo.endsWith('@profesor.duoc.cl')) {
-        this.navCtrl.navigateForward('docente');
-      } else if (this.correo.endsWith('@duocuc.cl')) {
-        this.navCtrl.navigateForward('/alumno'); 
-      } else {
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'Dominio de correo no permitido.',
-          buttons: ['Aceptar'],
-        });
-        await alert.present();
+    try {
+      const userCredential = await this.userService.loginWithEmail(this.correo, this.contrasena);
+      
+      if (userCredential.user) {
+        if (this.correo.endsWith('@profesor.duoc.cl')) {
+          this.navCtrl.navigateForward('docente');
+        } else if (this.correo.endsWith('@duocuc.cl')) {
+          this.navCtrl.navigateForward('/alumno'); 
+        }
       }
-    } else {
+    } catch (error) {
       const alert = await this.alertController.create({
         header: 'Error',
-        message: 'Credenciales incorrectas.',
+        message: 'Credenciales incorrectas. ',
         buttons: ['Aceptar'],
       });
       await alert.present();

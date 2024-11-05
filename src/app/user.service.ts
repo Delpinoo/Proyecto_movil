@@ -1,65 +1,52 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from './shared/models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private usersKey = 'users';
-  private currentUserKey = 'currentUser';
 
-  constructor() {}
+  constructor(private afAuth: AngularFireAuth) {}
 
-  addUser(user: User): boolean {
-    const users: User[] = this.getUsers();
-    const existingUser = users.find(u => u.correo === user.correo);
-    
-    if (existingUser) {
-        console.log('El correo ya está registrado');
-        return false; 
+  // Método para registro de usuario en Firebase
+  async registerUser(correo: string, contrasena: string): Promise<void> {
+    try {
+      await this.afAuth.createUserWithEmailAndPassword(correo, contrasena);
+      console.log('Usuario registrado exitosamente');
+    } catch (error) {
+      console.error('Error al registrar el usuario', error);
+      throw error;
     }
-
-    users.push(user); 
-    localStorage.setItem(this.usersKey, JSON.stringify(users)); 
-    this.setCurrentUser(user); // Asegúrate de que esto se ejecute después de registrar
-    console.log('Usuarios registrados:', users);
-    return true; 
-}
-  getUsers(): User[] {
-    const users = localStorage.getItem(this.usersKey);
-    return users ? JSON.parse(users) : []; 
   }
 
-  getUserCount(): number {
-    return this.getUsers().length; 
-  }
-
-  login(correo: string, contrasena: string): boolean {
-    const users: User[] = this.getUsers();
-    const user = users.find(u => u.correo === correo && u.contrasena === contrasena);
-
-    if (user) {
-        this.setCurrentUser(user); // Almacena el usuario actual
-        return true;
+  // Método para enviar correo de recuperación de contraseña
+  async sendPasswordResetEmail(correo: string): Promise<void> {
+    try {
+      await this.afAuth.sendPasswordResetEmail(correo);
+      console.log('Correo de recuperación enviado');
+    } catch (error) {
+      console.error('Error al enviar el correo de recuperación', error);
+      throw error;
     }
-
-    return false;
-}
-
-  logout() {
-    localStorage.removeItem(this.currentUserKey);
   }
 
-  setCurrentUser(user: User): void {
-    localStorage.setItem(this.currentUserKey, JSON.stringify(user)); 
+  // Método para inicio de sesión
+  async login(correo: string, contrasena: string): Promise<void> {
+    try {
+      await this.afAuth.signInWithEmailAndPassword(correo, contrasena);
+      console.log('Inicio de sesión exitoso');
+    } catch (error) {
+      console.error('Error en el inicio de sesión', error);
+      throw error;
+    }
+  }
+  async loginWithEmail(correo: string, contrasena: string): Promise<any> {
+    return await this.afAuth.signInWithEmailAndPassword(correo, contrasena);
   }
 
-  getCurrentUser(): User | null {
-    const user = localStorage.getItem(this.currentUserKey);
-    return user ? JSON.parse(user) : null; // Retorna el usuario o null
-}
-
-  clearCurrentUser(): void {
-    localStorage.removeItem(this.currentUserKey); 
+  // Método para cerrar sesión
+  logout(): Promise<void> {
+    return this.afAuth.signOut();
   }
 }

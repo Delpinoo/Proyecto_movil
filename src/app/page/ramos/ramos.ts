@@ -35,7 +35,6 @@ export class RamosPage implements OnInit {
   constructor(private navCtrl: NavController, private userService: UserService) {}
 
   ngOnInit() {
-    this.user = this.userService.getCurrentUser();
     
     if (this.user) {
       this.setRamosPorCarrera(this.user.carrera);

@@ -29,8 +29,9 @@ export class RegisterPage implements OnInit {
 
   async Register() {
     if (this.validateFields()) {
-      const isRegistered = this.userService.addUser(this.user); 
-      if (isRegistered) {
+      try {
+        // Intentar registrar al usuario en Firebase
+        await this.userService.registerUser(this.user.correo, this.user.contrasena);
         const alert = await this.alertController.create({
           header: 'Éxito',
           message: 'Se registró correctamente',
@@ -46,10 +47,10 @@ export class RegisterPage implements OnInit {
         });
         alert.cssClass = 'custom-alert';
         await alert.present();
-      } else {
+      } catch (error) {
         const alert = await this.alertController.create({
           header: 'Error',
-          message: 'El correo ya está registrado.',
+          message: 'Hubo un error al registrarse. Verifique sus datos.',
           buttons: ['Aceptar'],
         });
         alert.cssClass = 'custom-alert';

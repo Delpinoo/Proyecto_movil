@@ -21,7 +21,6 @@ export class PerfilPage implements OnInit {
   }
 
   loadUserData() {
-    this.user = this.userService.getCurrentUser(); // Solo obtén el usuario actual
     console.log('Usuario actual:', this.user); // Esto te ayudará a depurar
 }
 
