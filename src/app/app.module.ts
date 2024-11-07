@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule, AngularFireModule.initializeApp(environment.firebaseConfig,),
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,  HttpClientModule, AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFireAuthModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

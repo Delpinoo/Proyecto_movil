@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { QrGenratedPageRoutingModule } from './qr-genrated-routing.module';
 import { QrGenratedPage } from './qr-genrated.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { QrCodeModule } from 'ng-qrcode';
+
 
 @NgModule({
   imports: [
@@ -12,7 +14,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     QrGenratedPageRoutingModule,
-    SharedModule
+    SharedModule,
+    QrCodeModule
   ],
   declarations: [QrGenratedPage]
 })

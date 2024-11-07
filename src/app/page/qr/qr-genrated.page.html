@@ -3,9 +3,7 @@
 <ion-content>
   <ion-list class="custom-list">
     <div class="qr-container">
-      <img [src]="qrUrl" alt="Código QR" class="center-image">
+      <qr-code [value]="hola" size="300" errorCorrectionLevel="M" />
     </div>
   </ion-list>
-
-  <ion-button expand="full" (click)="onGenerateNewQr()">Generar nuevo QR</ion-button>
 </ion-content>
