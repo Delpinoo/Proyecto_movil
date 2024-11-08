@@ -15,8 +15,7 @@ export class RegisterPage implements OnInit {
     correo: '',
     contrasena: '',
     confirmarContrasena: '',
-    carrera: '',
-    seccion: '',
+
   };
 
   constructor(
