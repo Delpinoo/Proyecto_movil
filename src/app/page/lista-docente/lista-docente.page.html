@@ -5,12 +5,16 @@
     <ion-searchbar placeholder="Buscarme en lista" class="search"></ion-searchbar>
     <ion-card-content>
       <div class="list-container">
+        <ion-select [(ngModel)]="selectedRamo" (ionChange)="loadAsistencia()">
+          <ion-select-option value="Inglés">Inglés</ion-select-option>
+          <ion-select-option value="Matemáticas">Matemáticas</ion-select-option>
+          <ion-select-option value="Programación">Programación</ion-select-option>
+          <ion-select-option value="Base de Datos">Base de Datos</ion-select-option>
+        </ion-select>
+        
         <ion-list>
-          <ion-item *ngFor="let item of items; let index">
-            <ion-avatar slot="start">
-              <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-            </ion-avatar>
-            <ion-label>{{ item }}</ion-label>
+          <ion-item *ngFor="let asistencia of asistenciaPorRamo">
+            <ion-label>{{ asistencia.date }} - {{ asistencia.studentId }}</ion-label>
           </ion-item>
         </ion-list>
       </div>

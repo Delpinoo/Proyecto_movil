@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { AlertController } from '@ionic/angular';
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-alumno',
@@ -13,7 +13,7 @@ export class AlumnoPage implements OnInit {
   isSupported = false;
   barcodes: Barcode[] = [];
 
-  constructor(private navCtrl: NavController, private alertController: AlertController) { }
+  constructor(private navCtrl: NavController, private alertController: AlertController, private firestore: AngularFirestore) { }
   
   goToverification() {
     this.navCtrl.navigateForward('/verificacion')
@@ -39,9 +39,20 @@ export class AlumnoPage implements OnInit {
       this.presentAlert();
       return;
     }
+  
     const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
-  }
+    const barcodeData = barcodes[0]?.rawValue; // Suponiendo que el QR contiene el ramo y el ID del estudiante
+  
+    if (barcodeData) {
+      const [ramo, studentId] = barcodeData.split('-'); // Suponiendo que el QR está formado por ramo-id
+      // Aquí guardas la información de la asistencia en Firebase
+      await this.firestore.collection('asistencia').add({
+        ramo: ramo,
+        studentId: studentId,
+        date: new Date().toISOString(),
+      });
+    }
+    }
 
   async requestPermissions(): Promise<boolean> {
     const { camera } = await BarcodeScanner.requestPermissions();

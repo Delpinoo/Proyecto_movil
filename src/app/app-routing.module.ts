@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./page/verificacion/verificacion.module').then( m => m.VerificacionPageModule)
   },
   {
-    path: 'qr',
-    loadChildren: () => import('./page/qr/qr-genrated.module').then( m => m.QrGenratedPageModule)
+    path: 'qr-genrated/:ramo',  // Asegúrate de que esta ruta existe
+    loadChildren: () => import('./page/qr/qr-genrated.module').then(m => m.QrGenratedPageModule)
   },
   {
     path: 'ramos',
@@ -62,7 +62,8 @@ const routes: Routes = [
   {
     path: 'lista-alumno',
     loadChildren: () => import('./page/lista-alumno/lista-alumno.module').then( m => m.ListaAlumnoPageModule)
-  },  {
+  },
+  {
     path: 'asignatura',
     loadChildren: () => import('./page/asignatura/asignatura.module').then( m => m.AsignaturaPageModule)
   },
