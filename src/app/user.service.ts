@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { User } from './shared/models/user.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +28,7 @@ export class UserService {
           nombre: nombre,
           apellido: apellido,
           correo: correo,
+          uid: user.uid,  // Aquí se guarda el UID de Firebase
         });
       }
 
@@ -56,12 +59,22 @@ export class UserService {
       throw error;
     }
   }
-  async loginWithEmail(correo: string, contrasena: string): Promise<any> {
-    return await this.auth.signInWithEmailAndPassword(correo, contrasena);
-  }
 
   // Método para cerrar sesión
   logout(): Promise<void> {
     return this.auth.signOut();
+  }
+  async loginWithEmail(correo: string, contrasena: string): Promise<any> {
+    return await this.auth.signInWithEmailAndPassword(correo, contrasena);
+  }
+
+  // Método para obtener el usuario por su ID (UID)
+  getUserById(studentId: string): Observable<any> {
+    return this.firestore.collection('usuarios').doc(studentId).get().pipe(
+      catchError(error => {
+        console.error('Error al obtener usuario', error);
+        throw error;  // O puedes retornar un objeto vacío para manejar el error
+      })
+    );
   }
 }
