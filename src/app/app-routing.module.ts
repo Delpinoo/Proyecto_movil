@@ -62,7 +62,19 @@ const routes: Routes = [
   {
     path: 'lista-alumno',
     loadChildren: () => import('./page/lista-alumno/lista-alumno.module').then( m => m.ListaAlumnoPageModule)
+  },  {
+    path: 'asignatura',
+    loadChildren: () => import('./page/asignatura/asignatura.module').then( m => m.AsignaturaPageModule)
   },
+  {
+    path: 'horario-asignatura',
+    loadChildren: () => import('./page/horario-asignatura/horario-asignatura.module').then( m => m.HorarioAsignaturaPageModule)
+  },
+  {
+    path: 'asignatura-qr',
+    loadChildren: () => import('./page/asignatura-qr/asignatura-qr.module').then( m => m.AsignaturaQrPageModule)
+  },
+
 
 
 

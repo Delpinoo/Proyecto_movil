@@ -9,14 +9,11 @@ import { UserService } from 'src/app/user.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  user = {
-    nombre: '',
-    apellido: '',
-    correo: '',
-    contrasena: '',
-    confirmarContrasena: '',
-
-  };
+    nombre: string ='';
+    apellido: string = '';
+    correo: string = '';
+    contrasena: string ='';
+    confirmarContrasena: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -30,22 +27,35 @@ export class RegisterPage implements OnInit {
     if (this.validateFields()) {
       try {
         // Intentar registrar al usuario en Firebase
-        await this.userService.registerUser(this.user.correo, this.user.contrasena);
-        const alert = await this.alertController.create({
-          header: 'Éxito',
-          message: 'Se registró correctamente',
-          buttons: [
-            {
-              text: 'Aceptar',
-              handler: () => {
-                this.router.navigate(['/home']);
+        const userCredential = await this.userService.registerUser(this.nombre, this.apellido ,this.correo, this.contrasena);    
+        const user = userCredential.user;
+
+        if (user) { // Verifica que user no sea null
+          const uid = user.uid;
+          const alumnoData = {
+            UID: uid,
+            Nombre: this.nombre,
+            Apellido: this.apellido,
+          };
+          const alert = await this.alertController.create({
+            header: 'Éxito',
+            message: 'Se registró correctamente',
+            buttons: [
+              {
+                text: 'Aceptar',
+                handler: () => {
+                  this.router.navigate(['/home']);
+                },
+                cssClass: 'alert-button-white',
               },
-              cssClass: 'alert-button-white',
-            },
-          ],
-        });
-        alert.cssClass = 'custom-alert';
-        await alert.present();
+            ],
+          });
+          alert.cssClass = 'custom-alert';
+          await alert.present();
+        } else {
+          // Maneja el caso en que user sea null
+          await this.showAlert('Error', 'No se pudo obtener la información del usuario.');
+        }
       } catch (error) {
         const alert = await this.alertController.create({
           header: 'Error',
@@ -59,14 +69,14 @@ export class RegisterPage implements OnInit {
   }
 
   validateFields(): boolean {
-    const nombreValid = this.user.nombre.length > 3 && /^[a-zA-Z]+$/.test(this.user.nombre);
-    const apellidoValid = this.user.apellido.length > 3 && /^[a-zA-Z]+$/.test(this.user.apellido);
+    const nombreValid = this.nombre.length > 3 && /^[a-zA-Z]+$/.test(this.nombre);
+    const apellidoValid = this.apellido.length > 3 && /^[a-zA-Z]+$/.test(this.apellido);
     const correoValid = 
-    this.user.correo.endsWith('@duocuc.cl') || 
-    this.user.correo.endsWith('@profesor.duoc.cl');
-    const contrasenaValid = this.user.contrasena.length > 8 
-                            && /[A-Z]/.test(this.user.contrasena) 
-                            && /[0-9]/.test(this.user.contrasena);
+    this.correo.endsWith('@duocuc.cl') || 
+    this.correo.endsWith('@profesor.duoc.cl');
+    const contrasenaValid = this.contrasena.length > 8 
+                            && /[A-Z]/.test(this.contrasena) 
+                            && /[0-9]/.test(this.contrasena);
 
     if (!nombreValid) {
       this.showAlert('Error', 'El nombre debe tener más de 5 caracteres y no puede contener números ni símbolos.');
@@ -88,7 +98,7 @@ export class RegisterPage implements OnInit {
       return false;
     }
 
-    if (this.user.contrasena !== this.user.confirmarContrasena) {
+    if (this.contrasena !== this.confirmarContrasena) {
       this.showAlert('Error', 'Las contraseñas no coinciden.');
       return false;
     }
