@@ -18,6 +18,7 @@ export class ListaDocentePage implements OnInit, OnDestroy {
   selectedRamo: string = '';
   asistenciaPorRamo: any[] = [];
   private asistenciaSubscription!: Subscription;
+  searchTerm: string = '';  // Término de búsqueda
 
   constructor(
     private alertController: AlertController,
@@ -113,5 +114,10 @@ export class ListaDocentePage implements OnInit, OnDestroy {
     if (this.asistenciaSubscription) {
       this.asistenciaSubscription.unsubscribe();
     }
+  }
+
+  // Método para filtrar la lista según el término de búsqueda
+  filterList() {
+    // Puedes agregar lógica para filtrar la lista si es necesario.
   }
 }

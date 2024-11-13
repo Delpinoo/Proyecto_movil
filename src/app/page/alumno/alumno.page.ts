@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
-import { AlertController } from '@ionic/angular';
-import { AngularFirestore } from '@angular/fire/compat/firestore';  // Asegúrate de que Timestamp esté importado
-import { UserService } from 'src/app/user.service';  // Importa el servicio UserService
-import { User } from 'src/app/shared/models/user.model';  // Modelo User
+import { BarcodeScanner } from '@capacitor-mlkit/barcode-scanning'; // Correcta importación
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserService } from 'src/app/user.service';
 import { Timestamp } from 'firebase/firestore';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alumno',
@@ -13,63 +14,63 @@ import { Timestamp } from 'firebase/firestore';
   styleUrls: ['./alumno.page.scss'],
 })
 export class AlumnoPage implements OnInit {
-  isSupported = false;
-  barcodes: Barcode[] = [];
-  studentName: string = '';
-
   constructor(
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore,
+    private userService: UserService,
+    private router: Router,
     private navCtrl: NavController,
     private alertController: AlertController,
-    private firestore: AngularFirestore,
-    private userService: UserService  // Inyectamos el UserService
-  ) { }
+  ) {}
+
+  isSupported: boolean = false;
+  barcodes: any[] = [];
+
 
   ngOnInit() {
     BarcodeScanner.isSupported().then((result) => {
       this.isSupported = result.supported;
     });
   }
-
-  goToVerification() {
-    this.navCtrl.navigateForward('/verificacion');
-  }
-
+  // Redirige a la página de Ramos
   goToRamos() {
-    this.navCtrl.navigateForward('/ramos');
+    this.router.navigate(['/ramos']); // Cambia '/ramos' por la ruta correspondiente
   }
 
+  // Redirige a la página de la lista de alumnos
   goToListaAlumno() {
-    this.navCtrl.navigateForward('/lista-alumno');
+    this.router.navigate(['/lista-alumno']); // Cambia '/lista-alumno' por la ruta correspondiente
   }
 
-  async scan(): Promise<void> {
-    const granted = await this.requestPermissions();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
+  // Método para iniciar el escaneo del código QR
+  async scanQRCode() {
+    try {
+      // Verificar permisos de cámara
+      const granted = await this.requestPermissions(); // Solicitar permisos para la cámara
+      if (!granted) {
+        this.presentAlert('Se necesita permiso para acceder a la cámara.');
+        return;
+      }
   
-    const { barcodes } = await BarcodeScanner.scan();
-    console.log('Datos escaneados:', barcodes);  // Verifica los datos escaneados
+      // Iniciar el escaneo del código QR
+      const { barcodes } = await BarcodeScanner.scan();
   
-    const barcodeData = barcodes[0]?.rawValue?.trim();  // Eliminar espacios extra
-    console.log("QR data:", barcodeData);  // Verifica lo que contiene el QR
+      console.log('Datos escaneados:', barcodes);  // Verifica los datos escaneados
   
-    if (barcodeData) {
-      const parts = barcodeData.split('-');  // Divide la cadena usando el guion como separador
-      console.log('Parts:', parts);
+      const barcodeData = barcodes[0]?.rawValue?.trim();  // Eliminar espacios extra
+      console.log("QR data:", barcodeData);  // Verifica lo que contiene el QR
   
-      if (parts.length === 2) {
-        const ramo = parts[0];
-        const studentId = parts[1];
-        console.log('Ramo:', ramo, 'StudentId:', studentId);
+      if (barcodeData) {
+        // Aquí asumimos que el QR solo contiene el qr_id
+        const qr_id = barcodeData;  // Asignamos el valor completo del QR al qr_id
+        console.log('qr_id:', qr_id);
   
-        // Guardar la información en Firebase
-        if (ramo && studentId) {
+        // Ahora procedemos a registrar la asistencia usando el qr_id
+        if (qr_id) {
           try {
+            // Usar Firestore para registrar la asistencia
             await this.firestore.collection('asistencia').add({
-              ramo: ramo,
-              studentId: studentId,
+              qr_id: qr_id,  // Guardamos el qr_id como parte del registro
               date: Timestamp.now(),  // Usar Timestamp en lugar de new Date()
             });
   
@@ -81,40 +82,17 @@ export class AlumnoPage implements OnInit {
             await this.presentErrorAlert('Hubo un problema al registrar la asistencia');
           }
         } else {
-          console.log('Error: El QR no contiene ramo o studentId válidos');
-          await this.presentErrorAlert('El QR escaneado no tiene el formato esperado');
+          console.log('Error: El QR no contiene un qr_id válido');
+          await this.presentErrorAlert('El QR escaneado no tiene un formato esperado');
         }
       } else {
-        console.log('Error: El QR no tiene el formato esperado');
-        await this.presentErrorAlert('El QR escaneado no tiene el formato esperado');
+        console.log('Error: No se encontró ningún dato en el QR');
+        await this.presentErrorAlert('No se encontró ningún dato en el QR');
       }
-    } else {
-      console.log('Error: No se encontró ningún dato en el QR');
-      await this.presentErrorAlert('No se encontró ningún dato en el QR');
+    } catch (error) {
+      console.error('Error al escanear el código QR', error);
+      await this.presentErrorAlert('Hubo un error al intentar escanear el QR');
     }
-  }
-
-  async presentAlertasistencia(): Promise<void> {
-    const alert = await this.alertController.create({
-      header: 'Asistencia registrada',
-      message: 'Tu asistencia ha sido registrada correctamente.',
-      buttons: ['OK'],
-    });
-    await alert.present();
-  }
-
-  async requestPermissions(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
-  }
-
-  async presentAlert(header: string = 'Permiso denegado', message: string = 'Para usar la aplicación autorizar los permisos de cámara'): Promise<void> {
-    const alert = await this.alertController.create({
-      header,
-      message,
-      buttons: ['OK'],
-    })
-    await alert.present();
   }
 
   async presentSuccessAlert(): Promise<void> {
@@ -125,6 +103,20 @@ export class AlumnoPage implements OnInit {
     });
     await alert.present();
   }
+  
+  async presentAlert(header: string = 'Permiso denegado', message: string = 'Para usar la aplicación autorizar los permisos de cámara'): Promise<void> {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async requestPermissions(): Promise<boolean> {
+    const { camera } = await BarcodeScanner.requestPermissions();
+    return camera === 'granted' || camera === 'limited'; // Ajuste para manejar el permiso 'limited'
+  }
 
   async presentErrorAlert(message: string) {
     const alert = await this.alertController.create({
@@ -133,5 +125,27 @@ export class AlumnoPage implements OnInit {
       buttons: ['OK']
     });
     await alert.present();
+  }
+
+  // Método para guardar la asistencia en la colección "asistencia"
+  async saveAssistance(studentId: string, qrId: string) {
+    try {
+      const fecha = new Date(); // Fecha actual
+      const horaRegistro = Timestamp.fromDate(fecha); // Hora de registro
+
+      // Crear el documento en Firestore
+      await this.firestore.collection('asistencia').add({
+        estado: 'Presente', // Suponemos que el estado es 'Presente'
+        fecha: fecha,
+        hora_registro: horaRegistro,
+        id_estudiante: studentId,
+        qr_id: qrId,
+        ramo: qrId, // Puedes ajustar esto si el ramo está almacenado en otro lugar
+      });
+
+      console.log('Asistencia registrada correctamente');
+    } catch (error) {
+      console.error('Error al guardar la asistencia:', error);
+    }
   }
 }

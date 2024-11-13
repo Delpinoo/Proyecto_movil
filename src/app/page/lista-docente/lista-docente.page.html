@@ -1,10 +1,18 @@
 <app-encabezado></app-encabezado>
 
-<ion-content >
+<ion-content>
   <ion-card class="custom-class">
-    <ion-searchbar placeholder="Buscarme en lista" class="search"></ion-searchbar>
+    <!-- Barra de búsqueda -->
+    <ion-searchbar 
+      placeholder="Buscarme en lista" 
+      class="search" 
+      [(ngModel)]="searchTerm"
+      (ionInput)="filterList()"
+    ></ion-searchbar>
+    
     <ion-card-content>
       <div class="list-container">
+        <!-- Selector de ramo -->
         <ion-select [(ngModel)]="selectedRamo" (ionChange)="loadAsistenciaPorRamo()">
           <ion-select-option value="Inglés">Inglés</ion-select-option>
           <ion-select-option value="Matemáticas">Matemáticas</ion-select-option>
@@ -12,11 +20,12 @@
           <ion-select-option value="Base de Datos">Base de Datos</ion-select-option>
         </ion-select>
         
+        <!-- Lista de estudiantes -->
         <ion-list>
-          <ion-item *ngFor="let asistencia of asistenciaPorRamo">
+          <ion-item *ngFor="let asistencia of asistenciaPorRamo | filterList:searchTerm">
             <ion-label>
               <h2>{{ asistencia.studentName }}</h2>
-              <p>{{ asistencia.date ? (asistencia.date | date: 'short') : 'Fecha no disponible' }}</p> <!-- Formato de fecha -->
+              <p>{{ asistencia.date ? (asistencia.date | date: 'short') : 'Fecha no disponible' }}</p>
             </ion-label>
           </ion-item>
         </ion-list>

@@ -5,7 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { ListaDocentePageRoutingModule } from './lista-docente-routing.module';
 import { ListaDocentePage } from './lista-docente.page';
-
+import { FilterListPipe } from './filtro-piper.pipe';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +14,6 @@ import { ListaDocentePage } from './lista-docente.page';
     ListaDocentePageRoutingModule,
     SharedModule
   ],
-  declarations: [ListaDocentePage]
+  declarations: [ListaDocentePage, FilterListPipe]
 })
 export class ListaDocentePageModule {}

@@ -9,7 +9,7 @@
     </div>
     <div class="ramos-container">
     </div>
-    <ion-item detail="true" routerLink="/qr-genrated/{{ item.titulo }}" *ngFor="let item of vinculos">
+    <ion-item detail="true" routerLink="/qr-genrated/{{ item.id }}" *ngFor="let item of vinculos">
       <ion-label class="i-text-capitalize">{{ item.titulo }}</ion-label>
       <ion-icon name="{{ item.icono }}" slot="start"></ion-icon>
     </ion-item>

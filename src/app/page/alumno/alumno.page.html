@@ -12,13 +12,12 @@
     <div class="container">
       <div class="link-card">
         <img src="assets/images/qr.png" alt="Escanear QR" class="center-image">
-        <!--<ion-button expand="block" class="center-button">Escanear QR</ion-button> -->
-        <ion-button  (click)="scan()" [disabled]="!isSupported">
+        <ion-button (click)="scanQRCode()" [disabled]="!isSupported">
           <ion-icon slot="start" name="scan"></ion-icon>
           Escanear QR
         </ion-button>
       </div>
-    </div>
+    </div>    
   </ion-list>
   <ion-list class="custom-list-second">
   <div class="container">
