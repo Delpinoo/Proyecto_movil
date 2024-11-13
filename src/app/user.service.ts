@@ -59,7 +59,14 @@ export class UserService {
       throw error;
     }
   }
-
+  async getCurrentUserData(): Promise<any> {
+    const currentUser = await this.auth.currentUser;
+    if (currentUser) {
+      const userDoc = await this.firestore.collection('users').doc(currentUser.uid).get().toPromise();
+      return userDoc?.data();
+    }
+    return null;
+  }
   // Método para cerrar sesión
   logout(): Promise<void> {
     return this.auth.signOut();

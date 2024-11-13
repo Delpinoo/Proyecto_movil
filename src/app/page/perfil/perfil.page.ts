@@ -12,7 +12,7 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class PerfilPage implements OnInit {
 
-  user: User | null = null;
+  user: any = null;
 
   constructor(private navCtrl: NavController, private alertController: AlertController, private router: Router, private userService: UserService) { }
 
@@ -20,9 +20,14 @@ export class PerfilPage implements OnInit {
     this.loadUserData();
   }
 
-  loadUserData() {
-    console.log('Usuario actual:', this.user); // Esto te ayudará a depurar
-}
+  async loadUserData() {
+    try {
+      this.user = await this.userService.getCurrentUserData();
+      console.log('Usuario actual:', this.user);  // Ayuda para verificar que los datos se cargan
+    } catch (error) {
+      console.error('Error al cargar datos del usuario:', error);
+    }
+  }
 
   async cerrar_sesion() {
 
