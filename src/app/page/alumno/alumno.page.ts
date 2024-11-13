@@ -8,6 +8,11 @@ import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
+interface UserData {
+  nombre: string;
+  // Puedes agregar otras propiedades que tenga el documento de usuario
+}
+
 @Component({
   selector: 'app-alumno',
   templateUrl: './alumno.page.html',
@@ -55,35 +60,42 @@ export class AlumnoPage implements OnInit {
       // Iniciar el escaneo del código QR
       const { barcodes } = await BarcodeScanner.scan();
   
-      console.log('Datos escaneados:', barcodes);  // Verifica los datos escaneados
+      console.log('Datos escaneados:', barcodes); // Verifica los datos escaneados
   
-      const barcodeData = barcodes[0]?.rawValue?.trim();  // Eliminar espacios extra
-      console.log("QR data:", barcodeData);  // Verifica lo que contiene el QR
+      const barcodeData = barcodes[0]?.rawValue?.trim(); // Eliminar espacios extra
+      console.log("QR data:", barcodeData); // Verifica lo que contiene el QR
   
       if (barcodeData) {
-        // Aquí asumimos que el QR solo contiene el qr_id
-        const qr_id = barcodeData;  // Asignamos el valor completo del QR al qr_id
+        const qr_id = barcodeData; // Asignamos el valor completo del QR al qr_id
         console.log('qr_id:', qr_id);
   
-        // Ahora procedemos a registrar la asistencia usando el qr_id
-        if (qr_id) {
-          try {
-            // Usar Firestore para registrar la asistencia
+        // Obtener el UID del usuario autenticado
+        const user = await this.auth.currentUser;
+        if (user) {
+          const uid = user.uid;
+  
+          // Obtener el nombre del alumno desde Firestore
+          const userDoc = await this.firestore.collection('users').doc(uid).get().toPromise();
+          
+          if (userDoc && userDoc.exists) {
+            const userData = userDoc.data() as UserData;
+            const nombreAlumno = userData?.nombre || 'Desconocido';
+  
+            // Registrar la asistencia con el qr_id, nombre del alumno, y otros datos
             await this.firestore.collection('asistencia').add({
-              qr_id: qr_id,  // Guardamos el qr_id como parte del registro
-              date: Timestamp.now(),  // Usar Timestamp en lugar de new Date()
+              qr_id: qr_id,
+              nombre_alumno: nombreAlumno, // Agregamos el nombre del alumno
+              date: Timestamp.now(), // Usar Timestamp en lugar de new Date()
             });
   
             console.log('Asistencia registrada correctamente');
-            await this.presentSuccessAlert();  // Mostrar alerta de éxito
-  
-          } catch (error) {
-            console.error('Error al registrar la asistencia:', error);
-            await this.presentErrorAlert('Hubo un problema al registrar la asistencia');
+            await this.presentSuccessAlert(); // Mostrar alerta de éxito
+          } else {
+            console.log('Error: No se encontró el usuario en Firestore');
+            await this.presentErrorAlert('No se encontró el usuario en la base de datos');
           }
         } else {
-          console.log('Error: El QR no contiene un qr_id válido');
-          await this.presentErrorAlert('El QR escaneado no tiene un formato esperado');
+          await this.presentErrorAlert('Usuario no autenticado.');
         }
       } else {
         console.log('Error: No se encontró ningún dato en el QR');
