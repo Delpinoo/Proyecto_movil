@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'asignatura-qr',
     loadChildren: () => import('./page/asignatura-qr/asignatura-qr.module').then( m => m.AsignaturaQrPageModule)
+  },  {
+    path: 'crear-ramo',
+    loadChildren: () => import('./page/crear-ramo/crear-ramo.module').then( m => m.CrearRamoPageModule)
   },
+
 
 
 

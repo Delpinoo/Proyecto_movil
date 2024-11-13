@@ -1,0 +1,30 @@
+<app-encabezado></app-encabezado>
+<ion-content>
+    <ion-list class="custom-list">
+      <ion-list-header class="title" color="primary">
+        <ion-label>Crear </ion-label>
+      </ion-list-header>
+
+      <ion-item >
+        <ion-label position="floating">Nombre Ramo:</ion-label>
+        <ion-input type="text" [(ngModel)]="nombre" name="nombre" required></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Sigla:</ion-label>
+        <ion-input type="text" [(ngModel)]="apellido" name="apellido" required></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Fecha-inicio:</ion-label>
+        <ion-input type="date" [(ngModel)]="correo" name="correo" required></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-label position="floating">Fecha-termino:</ion-label>
+        <ion-input type="date" [(ngModel)]="contrasena" name="contrasena" required></ion-input>
+      </ion-item>
+
+      <div class="buttom">
+        <ion-button type="submit" class="buttom" [disabled]="">Crear</ion-button>
+      </div>
+    </ion-list>
+
+</ion-content>

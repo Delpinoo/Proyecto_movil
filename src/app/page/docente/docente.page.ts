@@ -19,7 +19,9 @@ export class DocentePage implements OnInit {
   goTolista_docente() {
     this.navCtrl.navigateForward('/lista-docente')
   }
-
+  goTocrear_ramo() {
+    this.navCtrl.navigateForward('/crear-ramo')
+  }
 
   ngOnInit() {
   }
