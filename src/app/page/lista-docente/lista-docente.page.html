@@ -22,7 +22,7 @@
         
         <!-- Lista de estudiantes -->
         <ion-list>
-          <ion-item *ngFor="let asistencia of asistenciaPorRamo | filterList:searchTerm">
+          <ion-item *ngFor="let asistencia of asistenciaPorRamo">
             <ion-label>
               <h2>{{ asistencia.studentName }}</h2>
               <p>{{ asistencia.date ? (asistencia.date | date: 'short') : 'Fecha no disponible' }}</p>

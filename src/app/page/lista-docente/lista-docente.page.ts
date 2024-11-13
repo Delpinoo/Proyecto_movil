@@ -8,11 +8,22 @@ import { Asistencia } from 'src/app/interfaces/asistencia';
 import { Subscription } from 'rxjs';
 import { Timestamp } from 'firebase/firestore';
 
+type Ramo = 'Inglés' | 'Matemáticas' | 'Programación' | 'Base de Datos';
+
+// Mapa de nombres de ramos a sus correspondientes qr_id
+const ramoMap: { [key in Ramo]: string } = {
+  'Inglés': 'QR para INU201',
+  'Matemáticas': 'QR para MATH101',
+  'Programación': 'QR para PGY301',
+  'Base de Datos': 'QR para BDD401'
+};
+
 @Component({
   selector: 'app-lista-docente',
   templateUrl: './lista-docente.page.html',
   styleUrls: ['./lista-docente.page.scss'],
 })
+
 export class ListaDocentePage implements OnInit, OnDestroy {
   alertButtons = ['Aceptar'];
   selectedRamo: string = '';
@@ -34,47 +45,57 @@ export class ListaDocentePage implements OnInit, OnDestroy {
   loadAsistenciaPorRamo() {
     if (this.selectedRamo) {
       console.log('Ramo seleccionado:', this.selectedRamo);
-      this.firestore.collection('asistencia', ref =>
-        ref.where('ramo', '==', this.selectedRamo)
-      ).get().subscribe(snapshot => {
-        this.asistenciaPorRamo = [];  // Limpiar lista de asistencias
-        snapshot.docs.forEach((doc) => {
-          const data = doc.data() as Asistencia;
-          console.log('Datos de asistencia:', data);
-  
-          if (data && data.studentId) {
-            // Validar y convertir la fecha de asistencia
-            let asistenciaDate = this.convertToDate(data.date);
-  
-            // Log para verificar el valor de asistenciaDate
-            console.log('Asistencia Date:', asistenciaDate);
-  
-            // Llama a UserService para obtener el nombre del estudiante
-            this.userService.getUserById(data.studentId).subscribe(userData => {
-              this.asistenciaPorRamo.push({
-                date: asistenciaDate,
-                studentId: data.studentId,
-                studentName: userData?.name || 'Nombre no encontrado'
-              });
-            }, error => {
-              console.error('Error al obtener datos del usuario', error);
-              this.asistenciaPorRamo.push({
-                date: asistenciaDate,
-                studentId: data.studentId,
-                studentName: 'Error al cargar nombre'
-              });
-            });
+
+      // Obtener el qr_id correspondiente al ramo seleccionado
+      const ramoId = ramoMap[this.selectedRamo as Ramo];
+      
+      // Comprobar si se encontró un qr_id para el ramo seleccionado
+      if (ramoId) {
+        console.log('Consultando por qr_id:', ramoId);
+
+        this.firestore.collection('asistencia', ref =>
+          ref.where('qr_id', '==', ramoId)  // Filtrar por qr_id correspondiente al ramo
+        ).snapshotChanges().subscribe(snapshot => {
+          this.asistenciaPorRamo = [];  // Limpiar la lista antes de llenarla
+
+          // Verificar si se encontraron documentos
+          if (snapshot.length === 0) {
+            console.log('No se encontraron documentos para el ramo seleccionado.');
           }
+
+          snapshot.forEach(doc => {
+            const data = doc.payload.doc.data() as any;
+
+            // Verificar que los datos contienen las propiedades necesarias
+            if (data && data['nombre_alumno'] && data['date']) {
+              this.asistenciaPorRamo.push({
+                date: this.convertToDate(data['date']),
+                studentName: data['nombre_alumno']
+              });
+            } else {
+              console.warn('Datos incompletos o inválidos en el documento:', data);
+            }
+          });
+
+          console.log('Asistencia cargada:', this.asistenciaPorRamo);
+        }, error => {
+          console.error('Error al cargar la asistencia:', error);
         });
-      }, error => {
-        console.error('Error al cargar la asistencia:', error);
-      });
+      } else {
+        console.warn('No se encontró un qr_id para el ramo seleccionado.');
+      }
+    } else {
+      console.warn('No se ha seleccionado un ramo');
     }
   }
 
   convertToDate(date: any): Date | null {
-    if (!date) return null;  // Retorna null si `date` es null o undefined
-    if (date instanceof Timestamp) return date.toDate();
+    if (!date) return null;  // Retorna null si 'date' es null o undefined
+    if (date instanceof Timestamp) {
+      const convertedDate = date.toDate();
+      console.log('Fecha convertida:', convertedDate);
+      return convertedDate;
+    }
     if (date instanceof Date) return date;
     if (typeof date === 'string') return new Date(date);
     return null;
@@ -82,6 +103,7 @@ export class ListaDocentePage implements OnInit, OnDestroy {
 
   onRamoChange(event: any) {
     this.selectedRamo = event.target.value;
+    console.log('Ramo seleccionado:', this.selectedRamo);
     this.loadAsistenciaPorRamo();
   }
 

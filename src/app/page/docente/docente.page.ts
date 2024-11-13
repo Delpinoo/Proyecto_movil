@@ -16,6 +16,10 @@ export class DocentePage implements OnInit {
   goToasignatura() {
     this.navCtrl.navigateForward('/asignatura')
   }
+  goTolista_docente() {
+    this.navCtrl.navigateForward('/lista-docente')
+  }
+
 
   ngOnInit() {
   }
